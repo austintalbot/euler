@@ -5,18 +5,10 @@ export function largestPalindromeProduct(n) {
     var smallest_number = Math.pow(10, (n - 1)); //bracket for the smallest number with n digits
     var largest_palindrome = 0;
 
-    console.log(`largest number=${largest_number} smallest number=${smallest_number}`)
-
-
-    var largest_palindrome = 0;
-    var smallest_number = 0;
-    var largest_number = 99;
-
     for (var outer = largest_number; outer > smallest_number; outer--) {
         for (var inner = outer; inner > smallest_number; inner--) {
 
             var product = outer * inner;
-            console.log(`product = ${product}`)
 
             if (is_palindrome(product) && product > largest_palindrome) {
                 largest_palindrome = product;
@@ -27,7 +19,6 @@ export function largestPalindromeProduct(n) {
             }
         }
     }
-    console.log(`largest palindrome for n= ${n} = ${largest_palindrome}`)
     return largest_palindrome;
 }
 
