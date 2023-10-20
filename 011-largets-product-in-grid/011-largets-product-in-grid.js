@@ -1,33 +1,58 @@
 export function largestGridProduct(arr) {
-
     const numberAdjacent = 4;
     let maxProduct = 0;
+    let diagonalUpLeftProduct = 1;
+    let diagonalDownLeftProduct = 1;
+    let diagonalUpRightProduct = 1;
+    let diagonalDownrightProduct = 1;
+
+    let leftProduct = 1;
+    let rightProduct = 1;
+    let upProduct = 1;
+    let downProduct = 1;
+
+
 
     // loop through the rows
-    for (let rows = numberAdjacent; rows < arr.length - numberAdjacent; rows++) {
+    for (let rows = numberAdjacent; rows < arr.length ; rows++) {
         // loop through the columns
-        for (let cols = numberAdjacent; cols < arr.length - numberAdjacent; cols++) {
-        
-            let rightProduct = arr[rows][cols] * arr[rows][cols + 1] * arr[rows][cols + 2] * arr[rows][cols + 3];
-            let leftProduct = arr[rows][cols] * arr[rows][cols - 1] * arr[rows][cols - 2] * arr[rows][cols - 3];
-            let downProduct = arr[rows][cols] * arr[rows + 1][cols] * arr[rows + 2][cols] * arr[rows + 3][cols];
-            let upProduct = arr[rows][cols] * arr[rows - 1][cols] * arr[rows - 2][cols] * arr[rows - 3][cols];
-            
+        for (let cols = numberAdjacent; cols < arr.length; cols++) {
+            for (let k = 0; k < numberAdjacent; k++) {
 
-            let diagonalDownLeftProduct  = arr[rows][cols] * arr[rows - 1][cols + 1] * arr[rows - 2][cols + 2] * arr[rows - 3][cols + 3];
-            let diagonalUpLeftProduct       = arr[rows][cols] * arr[rows - 1][cols - 1] * arr[rows - 2][cols - 2] * arr[rows - 3][cols - 3];
-            let diagonalUpRightProduct     = arr[rows][cols] * arr[rows + 1][cols - 1] * arr[rows + 2][cols - 2] * arr[rows + 3][cols - 3];
-            let diagonalDownrightProduct  = arr[rows][cols] * arr[rows + 1][cols + 1] * arr[rows + 2][cols + 2] * arr[rows + 3][cols + 3];
+                if (rows > numberAdjacent && cols < numberAdjacent) {
+                    diagonalUpLeftProduct *= grid[rows-k][cols + k]                
+                }
+                if (rows < arr.length - numberAdjacent && cols < numberAdjacent) {
+                    diagonalDownLeftProduct *= grid[rows + k][cols + k]
+                }
+                if (rows > numberAdjacent && cols > numberAdjacent) {
+                    diagonalUpRightProduct *= grid[rows - k][cols - k]
+                }
+                if (rows < arr.length - numberAdjacent && cols > numberAdjacent) {
+                    diagonalDownrightProduct *= grid[rows + k][cols - k]
+                }
+                
+                if (rows >= numberAdjacent) {
+                    leftProduct *= grid[rows - k][cols]
+                }
+                if (rows < arr.length - numberAdjacent) {
+                    rightProduct *= grid[rows + k][cols]
+                }        
+                if (cols >= numberAdjacent) {
+                    upProduct *= grid[rows][cols - k]
+                }
+                if (cols < arr.length - numberAdjacent) {
+                    downProduct *= grid[rows][cols + k]
+                }
+            }
+
             // find max of each product
-            let max = Math.max(rightProduct, leftProduct, downProduct, upProduct, diagonalDownLeftProduct, diagonalUpLeftProduct, diagonalUpRightProduct, diagonalDownrightProduct,);
+            let max = Math.max(rightProduct, leftProduct, downProduct, upProduct, diagonalDownLeftProduct, diagonalUpLeftProduct, diagonalUpRightProduct, diagonalDownrightProduct);
             if (maxProduct < max) {
                 maxProduct = max;
             }
-
         }
-
     }
-
 
     return maxProduct;
 }
