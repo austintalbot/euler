@@ -32,8 +32,8 @@ const testGrid = [
   ];
 
 
-test("largestGridProduct(testGrid) should return 141169081", () => {
-    expect(largestGridProduct(testGrid)).toBe(141169081);
+test("largestGridProduct(testGrid) should return 14169081", () => {
+    expect(largestGridProduct(testGrid)).toBe(14169081);
 });
 
 test("largestGridProduct(grid) should return 70600674", () => {
@@ -42,3 +42,4 @@ test("largestGridProduct(grid) should return 70600674", () => {
 
 });
 
+ 

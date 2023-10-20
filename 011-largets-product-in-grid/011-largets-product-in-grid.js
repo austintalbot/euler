@@ -1,6 +1,7 @@
-export function largestGridProduct(arr) {
+ function largestGridProduct(arr) {
     const numberAdjacent = 4;
     let maxProduct = 0;
+    // initialize products to 1 because multiplying by 0 will always be 0
     let diagonalUpLeftProduct = 1;
     let diagonalDownLeftProduct = 1;
     let diagonalUpRightProduct = 1;
@@ -12,37 +13,35 @@ export function largestGridProduct(arr) {
     let downProduct = 1;
 
 
-
     // loop through the rows
-    for (let rows = numberAdjacent; rows < arr.length ; rows++) {
+    for (let rows = 0; rows < arr.length; rows++) {
         // loop through the columns
-        for (let cols = numberAdjacent; cols < arr.length; cols++) {
+        for (let cols = 0; cols < arr[0].length; cols++) {
             for (let k = 0; k < numberAdjacent; k++) {
+                if (rows >= numberAdjacent && cols <= numberAdjacent) {
+                    diagonalUpLeftProduct *= arr[rows - k][cols + k]
+                }
+                if (rows <= arr.length - numberAdjacent && cols <= numberAdjacent) {
+                    diagonalDownLeftProduct *= arr[rows + k][cols + k]
+                }
+                if (rows >= numberAdjacent && cols >= numberAdjacent) {
+                    diagonalUpRightProduct *= arr[rows - k][cols - k]
+                }
+                if (rows <= arr.length - numberAdjacent && cols >= numberAdjacent) {
+                    diagonalDownrightProduct *= arr[rows + k][cols - k]
+                }
 
-                if (rows > numberAdjacent && cols < numberAdjacent) {
-                    diagonalUpLeftProduct *= grid[rows-k][cols + k]                
-                }
-                if (rows < arr.length - numberAdjacent && cols < numberAdjacent) {
-                    diagonalDownLeftProduct *= grid[rows + k][cols + k]
-                }
-                if (rows > numberAdjacent && cols > numberAdjacent) {
-                    diagonalUpRightProduct *= grid[rows - k][cols - k]
-                }
-                if (rows < arr.length - numberAdjacent && cols > numberAdjacent) {
-                    diagonalDownrightProduct *= grid[rows + k][cols - k]
-                }
-                
                 if (rows >= numberAdjacent) {
-                    leftProduct *= grid[rows - k][cols]
+                    leftProduct *= arr[rows - k][cols]
                 }
-                if (rows < arr.length - numberAdjacent) {
-                    rightProduct *= grid[rows + k][cols]
-                }        
+                if (rows <= arr.length - numberAdjacent) {
+                    rightProduct *= arr[rows + k][cols]
+                }
                 if (cols >= numberAdjacent) {
-                    upProduct *= grid[rows][cols - k]
+                    upProduct *= arr[rows][cols - k]
                 }
-                if (cols < arr.length - numberAdjacent) {
-                    downProduct *= grid[rows][cols + k]
+                if (cols <= arr.length - numberAdjacent) {
+                    downProduct *= arr[rows][cols + k]
                 }
             }
 
@@ -51,6 +50,15 @@ export function largestGridProduct(arr) {
             if (maxProduct < max) {
                 maxProduct = max;
             }
+            // reset products
+            diagonalUpLeftProduct = 1;
+            diagonalDownLeftProduct = 1;
+            diagonalUpRightProduct = 1;
+            diagonalDownrightProduct = 1;
+            leftProduct = 1;
+            rightProduct = 1;
+            upProduct = 1;
+            downProduct = 1;
         }
     }
 
@@ -88,3 +96,4 @@ const testGrid = [
     [51, 54, 69, 16, 92],
     [7, 97, 57, 32, 16]
 ];
+largestGridProduct(grid);
