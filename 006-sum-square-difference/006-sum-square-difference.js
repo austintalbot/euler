@@ -9,7 +9,6 @@ export function sumSquareDifference(n) {
         sumOfSquares += i * i;
     }
 
-
     // Calculate the square of the sum
     const squareOfSum = sum * sum;
 
