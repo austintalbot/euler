@@ -11,7 +11,6 @@ export function primeSummation(n) {
     return sum;
 }
 
-// primeSummation(2000000);
 
 function isPrime(number) {
     if (number <= 1) {
